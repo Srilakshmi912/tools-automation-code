@@ -1,0 +1,22 @@
+format version: 10
+pipelines:
+  grafana:
+  group: Tools
+  materials:
+    git-da613e5:
+    git: https://github.com/Srilakshmi912/tools-automation-code.git
+    shallow-clone: false
+    auto-update: true
+    branch: main
+  stages:
+  - Ansible:
+      fetch-materials: true
+      approval:
+        type: manual
+      jobs:
+        ansible:
+          tasks:
+          -  exec: {command: ansible-playbook,arguments:["-i","grafana-internal.rdevops6a.online","tools.yml","-e","tool_name=grafana","ansible-user=ec2-user","-e", "ansible-password=DevOps321"],run_if:passed}
+
+
+
